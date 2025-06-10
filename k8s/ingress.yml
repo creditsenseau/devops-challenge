@@ -1,0 +1,18 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: techchallenge
+  namespace: ss
+spec:
+  rules:
+  - host: hostname
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: servicename
+            port:
+              number: serviceport
