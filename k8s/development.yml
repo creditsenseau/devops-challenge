@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appname
+  namespace: namespace
+  labels:
+    app:  appname
+spec:
+  selector:
+    matchLabels:
+      app: appname
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app:  appname
+    spec:
+      containers:
+      - name:  appname
+        image:  image
+        resources:
+          requests:
+            cpu: 10m
+            memory: 10Mi
+        readinessProbe:
+          httpGet:
+            path: /
+            port: portnumber
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        env:
+        - name: HOST_ENV
+          value: DEV 
+        ports:
+        - containerPort: portnumber
+          name:  portName
